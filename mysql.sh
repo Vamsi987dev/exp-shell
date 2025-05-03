@@ -36,9 +36,11 @@ validate $? "Installing mysql server"
 
 # Enable mysql server to start on boot
 systemctl enable mysqld &>> $log_file
+validate $? "enabled mysql"
 
 # Start mysql server
 systemctl start mysqld &>> $log_file
+validate $? "started mysql "
 
 # Check if root password is already set
 mysql -h mysql.daws81s.icu -u root -pExpenseApp@1 -e 'show databases;' &>> $log_file
