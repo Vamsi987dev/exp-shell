@@ -23,9 +23,9 @@ fi
 
 validate(){
     if [ $1 -ne 0 ]; then
-        echo "$2 is $R Failed $N" | tee -a $log_file
+        echo -e "$2 is $R Failed $N" | tee -a $log_file
     else
-        echo "$2 is $G Success $N" | tee -a $log_file
+        echo -e "$2 is $G Success $N" | tee -a $log_file
     fi
 
 }
