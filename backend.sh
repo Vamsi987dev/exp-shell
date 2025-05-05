@@ -41,7 +41,7 @@ validate $? "enable nodejs:20"
 dnf install nodejs -y &>> log_file
 validate $? "install nodejs"
 
-id expense
+id expense &>> log_file
 if [ $? -ne 0 ]; then
     echo "expense user doesn't exist...creating"
     useradd expense &>> log_file
