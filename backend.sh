@@ -3,6 +3,7 @@
 logs_folder="/var/log/expense"
 script_name="$( echo $0 | cut -d "." -f1 )"
 timestamp="$( date +%Y-%m-%d-%H-%M-%S )"
+mkdir -p $logs_folder
 log_file="$logs_folder/$script_name-$timestamp.log"
 
 userid=$( id -u )
