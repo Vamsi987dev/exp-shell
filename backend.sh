@@ -63,7 +63,21 @@ validate $? "extracting backend application code"
 
 npm install &>>$log_file
 
-cp 
+cp /home/ec2-user/exp-shell/backend.service /etc/systemd/system/backend.service
 
+dnf install mysql -y &>>$log_file
+validate $? "installing mysql client"
+
+mysql -h mysql.daws81s.icu -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
+validate $? "schema loading"
+
+systemctl daemon-reload &>>$log_file
+validate $? "daemon-reload"
+
+systemctl enable backend &>>$log_file
+validate $? "enabled backend"
+
+systemctl restart backend &>>$log_file
+validate $? "restarted backend"
 
 
