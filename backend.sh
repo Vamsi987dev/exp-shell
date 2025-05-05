@@ -58,7 +58,7 @@ validate $? "downloading the code to tmp directory"
 
 cd /app
 rm -rf /app/* # remove the existing code
-unzip /tmp/backend.zip &>>$log_file
+unzip -qq /tmp/backend.zip &>>$log_file
 validate $? "extracting backend application code"
 
 
