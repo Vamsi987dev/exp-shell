@@ -32,26 +32,26 @@ validate(){
 
 echo "script started executing at $( date )" | tee -a $log_file
 
-dnf install nginx -y 
+dnf install nginx -y &>>$log_file
 validate $? "Installing nginx"
 
-systemctl enable nginx 
+systemctl enable nginx &>>$log_file
 validate $? "Enabling nginx"
 
-systemctl start nginx 
+systemctl start nginx &>>$log_file
 validate $? "Starting nginx"
 
-rm -rf /usr/share/nginx/html/* 
+rm -rf /usr/share/nginx/html/* &>>$log_file
 validate $? "Removing default website"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip 
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$log_file
 validate $? "downloading frontend code"
 
 cd /usr/share/nginx/html 
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>$log_file
 validate $? "Extracting the code"
 
-cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$log_file
 
-systemctl restart nginx
+systemctl restart nginx &>>$log_file
 validate $? "Restarted nginx"
